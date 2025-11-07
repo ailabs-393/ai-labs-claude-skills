@@ -1,7 +1,8 @@
 {
   "name": "ai-labs-claude-skills",
   "private": false,
-  "version": "1.0.16",
+  "version": "1.0.17",
+  "type": "module",
   "workspaces": [
     "packages/skills/*"
   ],
@@ -14,9 +15,12 @@
     "postinstall": "node install-skills.mjs",
     "preinstall": "node ensure-package-json.js"
   },
+  "bin": {
+    "ai-labs-claude-skills": "./bin/cli.mjs"
+  },
   "files": [
     "dist",
     "install-skills.mjs",
-    "ensure-package-json.js"
+    "bin"
   ]
 }

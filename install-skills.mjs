@@ -5,9 +5,8 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 🧭 Find root directory (avoid node_modules)
-function findRoot(startDir) {
-  let dir = startDir;
+// Find root (avoid node_modules)
+function findProjectRoot(dir) {
   while (dir !== path.parse(dir).root) {
     if (fs.existsSync(path.join(dir, "package.json")) && !dir.includes("node_modules")) {
       return dir;
@@ -17,25 +16,11 @@ function findRoot(startDir) {
   return process.cwd();
 }
 
-const projectRoot = findRoot(__dirname);
-const packageJsonPath = path.join(projectRoot, "package.json");
-
-// 🪄 Auto-create package.json if it doesn’t exist
-if (!fs.existsSync(packageJsonPath)) {
-  const pkg = {
-    name: "my-project",
-    version: "1.0.0",
-    private: true,
-    description: "Auto-generated for Claude skills",
-  };
-  fs.writeFileSync(packageJsonPath, JSON.stringify(pkg, null, 2));
-  console.log("🧩 Created package.json automatically.");
-}
-
+const projectRoot = findProjectRoot(__dirname);
 const distSkills = path.join(__dirname, "dist", "skills");
-const claudeSkills = path.join(projectRoot, ".claude", "skills");
+const targetSkillsDir = path.join(projectRoot, ".claude", "skills");
 
-// 🔁 Recursive copy
+// Recursive copy
 function copyRecursive(src, dest) {
   if (!fs.existsSync(src)) return;
   fs.mkdirSync(dest, { recursive: true });
@@ -48,40 +33,37 @@ function copyRecursive(src, dest) {
   }
 }
 
-// 🧹 Safe delete function
-function deleteRecursive(target) {
-  if (!fs.existsSync(target)) return;
-  for (const item of fs.readdirSync(target)) {
-    const p = path.join(target, item);
+// Recursive delete
+function deleteRecursive(dir) {
+  if (!fs.existsSync(dir)) return;
+  for (const item of fs.readdirSync(dir)) {
+    const p = path.join(dir, item);
     const stat = fs.statSync(p);
     if (stat.isDirectory()) deleteRecursive(p);
     else fs.unlinkSync(p);
   }
-  fs.rmdirSync(target);
+  fs.rmdirSync(dir);
 }
 
-// ⚙️ Main execution
 (async () => {
   try {
-    console.log(`📦 Installing Claude skills → ${claudeSkills}`);
-    fs.mkdirSync(path.dirname(claudeSkills), { recursive: true });
-    copyRecursive(distSkills, claudeSkills);
-    console.log("✅ Claude skills copied successfully!");
+    console.log("📦 Installing Claude skills to:", targetSkillsDir);
+    copyRecursive(distSkills, targetSkillsDir);
+    console.log("✅ Claude skills installed!");
 
-    // 🧹 Delete this package from node_modules
-    const packagePath = path.resolve(__dirname, "../.."); // ai-labs-claude-skills/
-    if (packagePath.includes("node_modules")) {
-      console.log("🧹 Cleaning up package folder to keep workspace clean...");
+    const packageDir = path.resolve(__dirname, "../..");
+    if (packageDir.includes("node_modules")) {
+      console.log("🧹 Cleaning up node_modules entry...");
       setTimeout(() => {
         try {
-          deleteRecursive(packagePath);
-          console.log("🧽 Cleanup complete — only .claude/skills remains!");
+          deleteRecursive(packageDir);
+          console.log("🧽 Package folder removed successfully!");
         } catch (err) {
           console.warn("⚠️ Cleanup failed:", err.message);
         }
-      }, 2000); // short delay to allow logs to print before removal
+      }, 1500);
     }
   } catch (err) {
-    console.error("❌ Error:", err);
+    console.error("❌ Error installing Claude skills:", err);
   }
 })();
