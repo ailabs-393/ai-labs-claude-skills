@@ -16,6 +16,7 @@
   },
   "files": [
     "dist",
-    "install-skills.mjs"
+    "install-skills.mjs",
+    "ensure-package-json.js"
   ]
 }
