@@ -11,7 +11,8 @@
     "gen:index": "node generate-index-files.js",
     "test": "npm test -ws",
     "build": "mkdir -p dist && cp -r packages/skills dist",
-    "postinstall": "node install-skills.mjs"
+    "postinstall": "node install-skills.mjs",
+     "preinstall": "node ./scripts/ensure-package-json.js"
   },
   "files": [
     "dist",
