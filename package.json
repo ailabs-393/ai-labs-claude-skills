@@ -1,7 +1,7 @@
 {
   "name": "ai-labs-claude-skills",
   "private": false,
-  "version": "1.0.21",
+  "version": "2.0.0",
   "type": "module",
   "workspaces": [
     "packages/skills/*"
