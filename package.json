@@ -12,7 +12,7 @@
     "test": "npm test -ws",
     "build": "mkdir -p dist && cp -r packages/skills dist",
     "postinstall": "node install-skills.mjs",
-    "preinstall": "node ./scripts/ensure-package-json.js"
+    "preinstall": "node ensure-package-json.js"
   },
   "files": [
     "dist",
