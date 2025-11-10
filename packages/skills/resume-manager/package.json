@@ -1,0 +1,11 @@
+{
+  "name": "@ai-labs-claude-skills/resume-manager",
+  "version": "1.0.0",
+  "description": "Claude AI skill: resume-manager",
+  "main": "index.js",
+  "files": [
+    "."
+  ],
+  "license": "MIT",
+  "author": "AI Labs"
+}

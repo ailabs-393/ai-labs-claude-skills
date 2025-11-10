@@ -12,6 +12,8 @@ A collection of reusable "skills" for Claude AI and developer tooling. Each skil
 ## Installation Command 
 
 - npm i ai-labs-claude-skills
+and if want to download the latest version than go for this command 
+- npm i ai-labs-claude-skills@latest
 
 ## Quick start
 1. Install (postinstall will attempt to copy skills into the host project):
