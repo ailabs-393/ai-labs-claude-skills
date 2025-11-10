@@ -46,9 +46,36 @@ npm i ai-labs-claude-skills@latest
 - Helpers to create packages/index files: create-packages.js, generate-index-files.js
 - Skills directory: packages/skills/ (each skill contains scripts, assets, and a SKILL.md)
 
-## Contributing
-- Add a new folder in `packages/skills/` with a `SKILL.md`, scripts, and optional assets.
-- Follow existing patterns for CLI usage and README documentation.
+## 🧠 Example Use Cases
+
+- Use these Claude “skills” to automate and extend your workflows:
+
+1. 🔍 SEO report and metadata generation
+
+2. 🧾 Document unpacking and validation
+
+3. 🧱 Docker container creation and setup
+
+4. 🧠 Resume or report generation scripts
+
+5. ⚙️ CI/CD pipeline auto-generation
+
+6. 📊 Developer project automation utilities
+
+## 🤝 Contributing
+
+- We welcome contributions from the community!
+Here’s how to add a new skill:
+
+1. Create a new folder inside packages/skills/. (or just add a new skill)
+
+2. Include a SKILL.md file describing your skill.
+
+3. Add your scripts, assets, or templates.
+
+4. Follow the existing project structure for consistency.
+
+5. Submit a pull request with clear details.
 
 ## License
 MIT
