@@ -76,10 +76,20 @@ Here’s how to add a new skill:
 2. Include a SKILL.md file describing your skill.
 
 3. Add your scripts, assets, or templates.
+   
+5. Run these commands to create index and package inside skills
+    ``` bash
+    node generate-index.js
+    ```
+    and
+   ```bash
+   node generate-packages.js
+   ```
+ so that it can actually become a scalable skill   
 
-4. Follow the existing project structure for consistency.
+6. Follow the existing project structure for consistency.
 
-5. Submit a pull request with clear details.
+7. Submit a pull request with clear details.
 
 ## License
 - This project is licensed under the MIT License
